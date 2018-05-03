@@ -18,11 +18,14 @@ namespace WindowsFormsApp2
         int w;
         int h;
         double n0 = 0;
-        double n100 = 100;
+        double n100 = 200;
         double coeff_scale;
         double rotateX = 15;
         double rotateY = -30;
         double rotateZ = 0;
+        int n = 1;
+        int m = 1;
+        int k = 1;
         List<Node> nodes = new List<Node>();
         public Form1()
         {
@@ -53,6 +56,7 @@ namespace WindowsFormsApp2
             list.Add(new Node(n100, n100, n100));
             list.Add(new Node(n0, n100, n100));
             WriteDataGridView();
+            AddItemComboBox(nodes.Count);
             return list;
         }
         private void glControl1_Load(object sender, EventArgs e)
@@ -184,98 +188,146 @@ namespace WindowsFormsApp2
 
         private void buttonDivideNMK_Click(object sender, EventArgs e)
         {
-            int n = int.Parse(textBoxN.Text);
-            int m = int.Parse(textBoxM.Text);
-            int k = int.Parse(textBoxK.Text);
+            n = int.Parse(textBoxN.Text);
+            m = int.Parse(textBoxM.Text);
+            k = int.Parse(textBoxK.Text);
 
             // avoid to add the same node. Create new list and add new nodes
-            nodes = InitializeNodes();
+            //nodes = InitializeNodes();
 
-            int count_new_nodes = (n - 1) * 4 + (m - 1) * 4 + (k - 1) * 4;
-            if (n > 1)
+            int count_new_nodes = (n + 1) * (m + 1) * (k + 1);
+            nodes = null;
+            nodes = new List<Node>();
+            for (double z = n0; z <= n100; z += (n100 - n0) / k) 
             {
-                double[] pointsX = new double[n - 1];
-                for (int i = 0; i < pointsX.Length; i++)
+                for (double y = n0; y <= n100; y += (n100 - n0) / m) 
                 {
-                    pointsX[i] = n0 + (n100 - n0) * (i + 1) / n;
+                    for (double x = n0; x <= n100; x += (n100 - n0) / n) 
+                    {
+                        nodes.Add(new Node(x, y, z));
+                    }
                 }
-                GL.Color3(Color.Red);
-                GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-                GL.Begin(BeginMode.Quads);
-
-                for (int i = 0; i < pointsX.Length; i++)
-                {
-                    int countFirst = nodes.Count;
-                    nodes.Add(new Node(pointsX[i], n0, n0));
-                    nodes.Add(new Node(pointsX[i], n0, n100));
-                    nodes.Add(new Node(pointsX[i], n100, n100));
-                    nodes.Add(new Node(pointsX[i], n100, n0));
-                    PaintQuads(countFirst, countFirst + 1, countFirst + 2, countFirst +3);
-                }
-                GL.End();
-               
             }
-            if (m > 1)
-            {
-                double[] pointsY = new double[m - 1];
-                for (int i = 0; i < pointsY.Length; i++)
-                {
-                    pointsY[i] = n0 + (n100 - n0) * (i + 1) / m;
-                }
-                GL.Color3(Color.Green);
-                GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-                GL.Begin(BeginMode.Quads);
+            MessageBox.Show(nodes.Count.ToString());
+            DrawMiniCube(Color.YellowGreen,n, m,0);
 
-                for (int i = 0; i < pointsY.Length; i++)
-                {
-                    int countFirst = nodes.Count;
-                    nodes.Add(new Node(n0,pointsY[i], n0));
-                    nodes.Add(new Node(n0,pointsY[i], n100));
-                    nodes.Add(new Node(n100,pointsY[i], n100));
-                    nodes.Add(new Node(n100,pointsY[i],  n0));
-                    PaintQuads(countFirst, countFirst + 1, countFirst + 2, countFirst + 3);
-                }
-                GL.End();
-                
-            }
-            if (k > 1)
-            {
-                double[] pointsZ = new double[k - 1];
-                for (int i = 0; i < pointsZ.Length; i++)
-                {
-                    pointsZ[i] = n0 + (n100 - n0) * (i + 1) / k;
-                }
-                GL.Color3(Color.Blue);
-                GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-                GL.Begin(BeginMode.Quads);
+            
 
-                for (int i = 0; i < pointsZ.Length; i++)
-                {
-                    int countFirst = nodes.Count;
-                    nodes.Add(new Node(n0, n0, pointsZ[i]));
-                    nodes.Add(new Node(n0, n100, pointsZ[i]));
-                    nodes.Add(new Node(n100, n100, pointsZ[i]));
-                    nodes.Add(new Node(n100, n0, pointsZ[i]));
-                    PaintQuads(countFirst, countFirst + 1, countFirst + 2, countFirst + 3);
-                }
-                GL.End();
-                //glControl1.SwapBuffers();
+            //if (n > 1)
+            //{
+            //    double[] pointsX = new double[n - 1];
+            //    for (int i = 0; i < pointsX.Length; i++)
+            //    {
+            //        pointsX[i] = n0 + (n100 - n0) * (i + 1) / n;
+            //    }
+            //    GL.Color3(Color.Red);
+            //    GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
+            //    GL.Begin(BeginMode.Quads);
 
-                //GL.Flush();
-            }
+            //    for (int i = 0; i < pointsX.Length; i++)
+            //    {
+            //        int countFirst = nodes.Count;
+            //        nodes.Add(new Node(pointsX[i], n0, n0));
+            //        nodes.Add(new Node(pointsX[i], n0, n100));
+            //        nodes.Add(new Node(pointsX[i], n100, n100));
+            //        nodes.Add(new Node(pointsX[i], n100, n0));
+            //        PaintQuads(countFirst, countFirst + 1, countFirst + 2, countFirst +3);
+            //    }
+            //    GL.End();
+
+            //}
+            //if (m > 1)
+            //{
+            //    double[] pointsY = new double[m - 1];
+            //    for (int i = 0; i < pointsY.Length; i++)
+            //    {
+            //        pointsY[i] = n0 + (n100 - n0) * (i + 1) / m;
+            //    }
+            //    GL.Color3(Color.Green);
+            //    GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
+            //    GL.Begin(BeginMode.Quads);
+
+            //    for (int i = 0; i < pointsY.Length; i++)
+            //    {
+            //        int countFirst = nodes.Count;
+            //        nodes.Add(new Node(n0,pointsY[i], n0));
+            //        nodes.Add(new Node(n0,pointsY[i], n100));
+            //        nodes.Add(new Node(n100,pointsY[i], n100));
+            //        nodes.Add(new Node(n100,pointsY[i],  n0));
+            //        PaintQuads(countFirst, countFirst + 1, countFirst + 2, countFirst + 3);
+            //    }
+            //    GL.End();
+
+            //}
+            //if (k > 1)
+            //{
+            //    double[] pointsZ = new double[k - 1];
+            //    for (int i = 0; i < pointsZ.Length; i++)
+            //    {
+            //        pointsZ[i] = n0 + (n100 - n0) * (i + 1) / k;
+            //    }
+            //    GL.Color3(Color.Blue);
+            //    GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
+            //    GL.Begin(BeginMode.Quads);
+
+            //    for (int i = 0; i < pointsZ.Length; i++)
+            //    {
+            //        int countFirst = nodes.Count;
+            //        nodes.Add(new Node(n0, n0, pointsZ[i]));
+            //        nodes.Add(new Node(n0, n100, pointsZ[i]));
+            //        nodes.Add(new Node(n100, n100, pointsZ[i]));
+            //        nodes.Add(new Node(n100, n0, pointsZ[i]));
+            //        PaintQuads(countFirst, countFirst + 1, countFirst + 2, countFirst + 3);
+            //    }
+            //    GL.End();
+
+            //}
 
             //for testing
             textBoxNodeCOunt.Text = nodes.Count.ToString();
-            if (count_new_nodes + 8 == nodes.Count)
+            if (nodes.Count == (n + 1) * (m + 1) * (k + 1))
+            {
                 textBoxIsNormCount.Text = "true";
+            }
             else
-                textBoxIsNormCount.Text = "false";
+            {
+                textBoxIsNormCount.Text = "falssse";
+            }
 
+            WriteDataGridView();
+            AddItemComboBox(nodes.Count);
             //glControl1.Refresh();
             glControl1.SwapBuffers();
 
 
         }
+
+        private void DrawMiniCube(Color color, int n, int m, int delta)
+        {
+            int[] cubes = new int[8];
+            cubes[0] = (0 + delta) % nodes.Count;
+            cubes[1] = (1 + delta) % nodes.Count;
+            cubes[2] = (n + 2 + delta) % nodes.Count;
+            cubes[3] = (n + 1 + delta) % nodes.Count;
+            cubes[4] = ((n + 1) * (m + 1) + delta) % nodes.Count;
+            cubes[5] = ((n + 1) * (m + 1) + 1 + delta) % nodes.Count;
+            cubes[6] = ((n + 1) * (m + 2) + 1 + delta) % nodes.Count;
+            cubes[7] = ((n + 1) * (m + 2) + delta) % nodes.Count;
+
+            GL.Color3(color);
+               GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
+               GL.Begin(BeginMode.Quads);
+            PaintQuads(cubes[0], cubes[1], cubes[5], cubes[4]);
+            PaintQuads(cubes[1], cubes[2], cubes[6], cubes[5]);
+            PaintQuads(cubes[4], cubes[7], cubes[6], cubes[5]);
+            PaintQuads(cubes[4], cubes[7], cubes[3], cubes[0]);
+            PaintQuads(cubes[7], cubes[6], cubes[2], cubes[3]);
+            //glControl1.Invalidate();
+            GL.End();
+            glControl1.SwapBuffers();
+            
+        }
+
         private void WriteDataGridView()
         {
             for (int i = 0; i < nodes.Count; i++)
@@ -354,10 +406,24 @@ namespace WindowsFormsApp2
             textBoxXMouse.Text = x.ToString();
             textBoxYMouse.Text = y.ToString();
         }
+        
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            int indexNode = int.Parse(comboBoxChooseNode.SelectedItem.ToString());
+            MessageBox.Show(indexNode.ToString());
+            GL.Begin(BeginMode.Quads);
+            DrawMiniCube(Color.Red,n, m, indexNode);
+            GL.End();
+            //glControl1.SwapBuffers();
+        }
+        private void AddItemComboBox(int nodes_count)
+        {
+            comboBoxChooseNode.Items.Clear() ;
+            for (int i = 0; i < nodes_count; i++)
+            {
+                comboBoxChooseNode.Items.Add(i);
+            }
         }
     }
 }

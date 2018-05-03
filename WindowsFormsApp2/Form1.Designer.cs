@@ -52,12 +52,13 @@
             this.textBoxIsNormCount = new System.Windows.Forms.TextBox();
             this.buttonSwapBuffers = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.textBoxXMouse = new System.Windows.Forms.TextBox();
-            this.textBoxYMouse = new System.Windows.Forms.TextBox();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.X = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Y = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Z = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.textBoxXMouse = new System.Windows.Forms.TextBox();
+            this.textBoxYMouse = new System.Windows.Forms.TextBox();
+            this.comboBoxChooseNode = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,7 +68,7 @@
             this.glControl1.Location = new System.Drawing.Point(15, 14);
             this.glControl1.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.glControl1.Name = "glControl1";
-            this.glControl1.Size = new System.Drawing.Size(600, 450);
+            this.glControl1.Size = new System.Drawing.Size(636, 489);
             this.glControl1.TabIndex = 0;
             this.glControl1.VSync = false;
             this.glControl1.Load += new System.EventHandler(this.glControl1_Load);
@@ -296,23 +297,9 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 15;
             this.dataGridView1.RowTemplate.Height = 15;
+            this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridView1.Size = new System.Drawing.Size(370, 288);
             this.dataGridView1.TabIndex = 24;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // textBoxXMouse
-            // 
-            this.textBoxXMouse.Location = new System.Drawing.Point(939, 248);
-            this.textBoxXMouse.Name = "textBoxXMouse";
-            this.textBoxXMouse.Size = new System.Drawing.Size(100, 26);
-            this.textBoxXMouse.TabIndex = 25;
-            // 
-            // textBoxYMouse
-            // 
-            this.textBoxYMouse.Location = new System.Drawing.Point(1056, 246);
-            this.textBoxYMouse.Name = "textBoxYMouse";
-            this.textBoxYMouse.Size = new System.Drawing.Size(100, 26);
-            this.textBoxYMouse.TabIndex = 26;
             // 
             // ID
             // 
@@ -338,11 +325,35 @@
             this.Z.Name = "Z";
             this.Z.Width = 60;
             // 
+            // textBoxXMouse
+            // 
+            this.textBoxXMouse.Location = new System.Drawing.Point(939, 248);
+            this.textBoxXMouse.Name = "textBoxXMouse";
+            this.textBoxXMouse.Size = new System.Drawing.Size(100, 26);
+            this.textBoxXMouse.TabIndex = 25;
+            // 
+            // textBoxYMouse
+            // 
+            this.textBoxYMouse.Location = new System.Drawing.Point(1056, 246);
+            this.textBoxYMouse.Name = "textBoxYMouse";
+            this.textBoxYMouse.Size = new System.Drawing.Size(100, 26);
+            this.textBoxYMouse.TabIndex = 26;
+            // 
+            // comboBoxChooseNode
+            // 
+            this.comboBoxChooseNode.FormattingEnabled = true;
+            this.comboBoxChooseNode.Location = new System.Drawing.Point(1048, 299);
+            this.comboBoxChooseNode.Name = "comboBoxChooseNode";
+            this.comboBoxChooseNode.Size = new System.Drawing.Size(121, 28);
+            this.comboBoxChooseNode.TabIndex = 27;
+            this.comboBoxChooseNode.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1200, 692);
+            this.ClientSize = new System.Drawing.Size(1200, 723);
+            this.Controls.Add(this.comboBoxChooseNode);
             this.Controls.Add(this.textBoxYMouse);
             this.Controls.Add(this.textBoxXMouse);
             this.Controls.Add(this.dataGridView1);
@@ -410,6 +421,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn X;
         private System.Windows.Forms.DataGridViewTextBoxColumn Y;
         private System.Windows.Forms.DataGridViewTextBoxColumn Z;
+        private System.Windows.Forms.ComboBox comboBoxChooseNode;
     }
 }
 
