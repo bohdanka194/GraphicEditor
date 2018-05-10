@@ -256,9 +256,15 @@ namespace WindowsFormsApp2
                     }
                 }
             }
+
+
+            glControl1.SwapBuffers();
             DrawLinesCubes();
+
+
+            glControl1.SwapBuffers();
             //DrawMiniCube(Color.YellowGreen,n, m,0);
-            
+
             //if (n > 1)
             //{
             //    double[] pointsX = new double[n - 1];
@@ -343,8 +349,8 @@ namespace WindowsFormsApp2
             WriteDataGridView();
             AddItemComboBox(nodes.Count);
             //glControl1.Refresh();
-            glControl1.SwapBuffers();
-            
+
+
         }
 
         private void DrawMiniCube(Color color, int n, int m, int delta)
