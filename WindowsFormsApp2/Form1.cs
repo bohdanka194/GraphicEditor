@@ -101,19 +101,7 @@ namespace WindowsFormsApp2
             GL.LoadMatrix(ref mDim);
             GL.Color3(Color.White);
             GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-
-            // x,y,z,a : a - однорідні координати а =1, а = 0 - у безмежності
-            // нормаль,модель освітлення, джерело світла, параметри світла 
-            // туман fog колір плафона FogDensity FogHint - пунктирно лінії
-            // f = (e-z):(e-s) - FogMode.Linear ) isnye exp, exp2
-            // z - відстань від об'єкта до плафона
-            // e - end point
-            // s - start point
-            // математик освещение гугл
-
-            // некст -  матеріал, текстура
-            // енд - тінь малювати 
-            // GL.Enable(EnableCap.Lighting);       //штори                     
+                  
             GL.Enable(EnableCap.Light0); // джерела світла, 8 ламп 0..7
             GL.Light(LightName.Light0, LightParameter.Position, new float[] { 0.0f, 0.0f, 500.0f, 1.0f });
             // GL.Light(LightName.Light0, LightParameter.Diffuse, new float[] { 1.0f, 1.0f, 1.0f, 1.0f });
@@ -122,40 +110,12 @@ namespace WindowsFormsApp2
             GL.Enable(EnableCap.ColorMaterial);
             // will  be done GL.Material(MaterialFace.FrontAndBack, MaterialParameter.Specular,m_mat_spec);
             PaintCube(rotateX, rotateY, rotateZ);
-
+            
             glControl1.SwapBuffers();
         }
 
         private void glControl1_PaintCOPY(object sender, EventArgs e)
         {
-            //Matrix4 mDim;
-
-            //mDim = new Matrix4();
-            //mDim.Row0 = new Vector4(1.0f, 0.0f, 0.0f, 0.0f);
-            //mDim.Row1 = new Vector4(0.0f, 1.0f, 0.0f, 0.0f);
-            //mDim.Row2 = new Vector4(0.0f, 0.0f, 1.0f, 0.0f);
-            //mDim.Row3 = new Vector4(0.0f, 0.0f, 0.0f, 1.0f);
-
-            //if (!loaded) //Пока контекст не создан
-            //    return;
-
-            //GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-
-            //GL.MatrixMode(MatrixMode.Modelview);
-            //GL.LoadMatrix(ref mDim);
-            //GL.Color3(Color.White);
-            //GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-
-            //GL.Enable(EnableCap.Light0); // джерела світла, 8 ламп 0..7
-            //GL.Light(LightName.Light0, LightParameter.Position, new float[] { 0.0f, 0.0f, 500.0f, 1.0f });
-            ////     GL.Light(LightName.Light0, LightParameter.Diffuse, new float[] { 1.0f, 1.0f, 1.0f, 1.0f });
-            //GL.LightModel(LightModelParameter.LightModelLocalViewer, new float[] { 1.0f });
-
-            //GL.Enable(EnableCap.ColorMaterial);
-            //// will  be done GL.Material(MaterialFace.FrontAndBack, MaterialParameter.Specular,m_mat_spec);
-            //PaintCube(rotateX,rotateY,rotateZ);
-
-            //glControl1.SwapBuffers();
             
             NewMethod();
         }
@@ -349,8 +309,7 @@ namespace WindowsFormsApp2
             WriteDataGridView();
             AddItemComboBox(nodes.Count);
             //glControl1.Refresh();
-
-
+            
         }
 
         private void DrawMiniCube(Color color, int n, int m, int delta)
@@ -373,13 +332,12 @@ namespace WindowsFormsApp2
             PaintQuads(cubes[4], cubes[7], cubes[6], cubes[5]);
             PaintQuads(cubes[4], cubes[7], cubes[3], cubes[0]);
             PaintQuads(cubes[7], cubes[6], cubes[2], cubes[3]);
-            //glControl1.Invalidate();
+            
             GL.End();
             glControl1.SwapBuffers();
             
         }
-
-        private void WriteDataGridView()
+     private void WriteDataGridView()
         {
             for (int i = 0; i < nodes.Count; i++)
             {
@@ -417,7 +375,7 @@ namespace WindowsFormsApp2
         private void buttonRotateXMinus_Click(object sender, EventArgs e)
         {
             rotateX -= 10;
-            glControl1_PaintCOPY(sender, e);
+            glControl1_PaintCOPY(sender, e); 
         }
 
         private void buttonRotateYPlus_Click(object sender, EventArgs e)
@@ -467,11 +425,7 @@ namespace WindowsFormsApp2
 
             //MessageBox.Show(indexNode.ToString());
             DrawMiniCube(Color.GreenYellow,n, m, indexNode);
-            //glControl1.Invalidate();
             GL.End();
-            //glControl1.SwapBuffers();
-
-            //glControl1.SwapBuffers();
         }
         private void AddItemComboBox(int nodes_count)
         {
