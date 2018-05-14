@@ -17,8 +17,8 @@ namespace WindowsFormsApp2
         bool loaded = false;
         int w;
         int h;
-        double n0 = 0;
-        double n100 = 200;
+        double x_start = 0;
+        double x_end = 200;
         double coeff_scale;
         double rotateX = 15;
         double rotateY = -30;
@@ -47,14 +47,14 @@ namespace WindowsFormsApp2
         private List<Node> InitializeNodes()
         {
             List<Node> list = new List<Node>();
-            list.Add(new Node(n0, n0, n0));
-            list.Add(new Node(n100, n0, n0));
-            list.Add(new Node(n100, n0, n100));
-            list.Add(new Node(n0, n0, n100));
-            list.Add(new Node(n0, n100, n0));
-            list.Add(new Node(n100, n100, n0));
-            list.Add(new Node(n100, n100, n100));
-            list.Add(new Node(n0, n100, n100));
+            list.Add(new Node(x_start, x_start, x_start));
+            list.Add(new Node(x_end, x_start, x_start));
+            list.Add(new Node(x_end, x_start, x_end));
+            list.Add(new Node(x_start, x_start, x_end));
+            list.Add(new Node(x_start, x_end, x_start));
+            list.Add(new Node(x_end, x_end, x_start));
+            list.Add(new Node(x_end, x_end, x_end));
+            list.Add(new Node(x_start, x_end, x_end));
             WriteDataGridView();
             AddItemComboBox(nodes.Count);
             return list;
@@ -122,10 +122,13 @@ namespace WindowsFormsApp2
 
         private void PaintCube(double rotateX, double rotateY, double rotateZ)
         {
-            GL.Rotate(rotateY, 0, 1, 0);
+            int dx=100, dy=70, dz=3;
             GL.Rotate(rotateX, 1, 0, 0);
+            GL.Rotate(rotateY, 0, 1, 0);
             GL.Rotate(rotateZ, 0, 0, 1);
-            //GL.Translate(50, 50, 0);
+
+            GL.Translate(dx, dy, dz);
+
             nodes = InitializeNodes();
             GL.Color3(Color.White);
             GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line); // line
@@ -156,15 +159,15 @@ namespace WindowsFormsApp2
                 double[] pointsZ = new double[k - 1];
                 for (int i = 0; i < pointsX.Length; i++)
                 {
-                    pointsX[i] = n0 + (n100 - n0) * (i + 1) / n;
+                    pointsX[i] = x_start + (x_end - x_start) * (i + 1) / n;
                 }
                 for (int i = 0; i < pointsY.Length; i++)
                 {
-                    pointsY[i] = n0 + (n100 - n0) * (i + 1) / m;
+                    pointsY[i] = x_start + (x_end - x_start) * (i + 1) / m;
                 }
                 for (int i = 0; i < pointsZ.Length; i++)
                 {
-                    pointsZ[i] = n0 + (n100 - n0) * (i + 1) / k;
+                    pointsZ[i] = x_start + (x_end - x_start) * (i + 1) / k;
                 }
                 GL.Color3(Color.Blue);
                 GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
@@ -172,24 +175,24 @@ namespace WindowsFormsApp2
 
                 for (int i = 0; i < pointsX.Length; i++)
                 {
-                    GL.Vertex3(pointsX[i], n0, n0);
-                    GL.Vertex3(pointsX[i], n0, n100);
-                    GL.Vertex3(pointsX[i], n100, n100);
-                    GL.Vertex3(pointsX[i], n100, n0);
+                    GL.Vertex3(pointsX[i], x_start, x_start);
+                    GL.Vertex3(pointsX[i], x_start, x_end);
+                    GL.Vertex3(pointsX[i], x_end, x_end);
+                    GL.Vertex3(pointsX[i], x_end, x_start);
                 }
                 for (int i = 0; i < pointsY.Length; i++)
                 {
-                    GL.Vertex3(n0, pointsY[i], n0);
-                    GL.Vertex3(n0, pointsY[i], n100);
-                    GL.Vertex3(n100, pointsY[i], n100);
-                    GL.Vertex3(n100, pointsY[i], n0);
+                    GL.Vertex3(x_start, pointsY[i], x_start);
+                    GL.Vertex3(x_start, pointsY[i], x_end);
+                    GL.Vertex3(x_end, pointsY[i], x_end);
+                    GL.Vertex3(x_end, pointsY[i], x_start);
                 }
                 for (int i = 0; i < pointsZ.Length; i++)
                 {
-                    GL.Vertex3(n0, n0, pointsZ[i]);
-                    GL.Vertex3(n0, n100, pointsZ[i]);
-                    GL.Vertex3(n100, n100, pointsZ[i]);
-                    GL.Vertex3(n100, n0, pointsZ[i]);
+                    GL.Vertex3(x_start, x_start, pointsZ[i]);
+                    GL.Vertex3(x_start, x_end, pointsZ[i]);
+                    GL.Vertex3(x_end, x_end, pointsZ[i]);
+                    GL.Vertex3(x_end, x_start, pointsZ[i]);
                 }
                 GL.End();
             }
@@ -206,11 +209,11 @@ namespace WindowsFormsApp2
             int count_new_nodes = (n + 1) * (m + 1) * (k + 1);
             nodes = null;
             nodes = new List<Node>();
-            for (double z = n0; z <= n100; z += (n100 - n0) / k) 
+            for (double z = x_start; z <= x_end; z += (x_end - x_start) / k) 
             {
-                for (double y = n0; y <= n100; y += (n100 - n0) / m) 
+                for (double y = x_start; y <= x_end; y += (x_end - x_start) / m) 
                 {
-                    for (double x = n0; x <= n100; x += (n100 - n0) / n) 
+                    for (double x = x_start; x <= this.x_end; x += (this.x_end - x_start) / n) 
                     {
                         nodes.Add(new Node(x, y, z));
                     }
@@ -312,21 +315,31 @@ namespace WindowsFormsApp2
             
         }
 
-        private void DrawMiniCube(Color color, int n, int m, int delta)
+        private void DrawMiniCube(Color color, int delta)
         {
             int[] cubes = new int[8];
-            cubes[0] = (0 + delta) % nodes.Count;
-            cubes[1] = (1 + delta) % nodes.Count;
-            cubes[2] = (n + 2 + delta) % nodes.Count;
-            cubes[3] = (n + 1 + delta) % nodes.Count;
-            cubes[4] = ((n + 1) * (m + 1) + delta) % nodes.Count;
-            cubes[5] = ((n + 1) * (m + 1) + 1 + delta) % nodes.Count;
-            cubes[6] = ((n + 1) * (m + 2) + 1 + delta) % nodes.Count;
-            cubes[7] = ((n + 1) * (m + 2) + delta) % nodes.Count;
+
+            cubes[0] = (0 + (n + 1) * (m + 1) * (k - 1) + delta) % nodes.Count;
+            cubes[1] = (1 + (n + 1) * (m + 1) * (k - 1) + delta) % nodes.Count;
+            cubes[2] = (n + (n + 1) * (m + 1) * (k - 1) + 2 + delta) % nodes.Count;
+            cubes[3] = (n + 1 + (n + 1) * (m + 1) * (k - 1) + delta) % nodes.Count;
+            cubes[4] = ((n + 1) * (m + 1) + (n + 1) * (m + 1) * (k - 1) + delta) % nodes.Count;
+            cubes[5] = ((n + 1) * (m + 1) + (n + 1) * (m + 1) * (k - 1) + 1 + delta) % nodes.Count;
+            cubes[6] = ((n + 1) * (m + 2) + (n + 1) * (m + 1) * (k - 1) + 1 + delta) % nodes.Count;
+            cubes[7] = ((n + 1) * (m + 2) + (n + 1) * (m + 1) * (k - 1) + delta) % nodes.Count;
+
+            cubes[0] = (0 + (n + 1) * (m + 1) * (k - 1) + delta);
+            cubes[1] = (1 + (n + 1) * (m + 1) * (k - 1) + delta);
+            cubes[2] = (n + (n + 1) * (m + 1) * (k - 1) + 2 + delta);
+            cubes[3] = (n + 1 + (n + 1) * (m + 1) * (k - 1) + delta);
+            cubes[4] = ((n + 1) * (m + 1) + (n + 1) * (m + 1) * (k - 1) + delta);
+            cubes[5] = ((n + 1) * (m + 1) + (n + 1) * (m + 1) * (k - 1) + 1 + delta);
+            cubes[6] = ((n + 1) * (m + 2) + (n + 1) * (m + 1) * (k - 1) + 1 + delta);
+            cubes[7] = ((n + 1) * (m + 2) + (n + 1) * (m + 1) * (k - 1) + delta);
 
             GL.Color3(color);
-               GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-               GL.Begin(BeginMode.Quads);
+            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
+            GL.Begin(BeginMode.Quads);
             PaintQuads(cubes[0], cubes[1], cubes[5], cubes[4]);
             PaintQuads(cubes[1], cubes[2], cubes[6], cubes[5]);
             PaintQuads(cubes[4], cubes[7], cubes[6], cubes[5]);
@@ -352,7 +365,7 @@ namespace WindowsFormsApp2
         private void buttonPlus_Click(object sender, EventArgs e)
         {
             coeff_scale = 1.2;
-            n100 *= coeff_scale ;
+            x_end *= coeff_scale ;
             nodes = ReWriteNodeAfterScale(nodes, coeff_scale);
             
             glControl1_PaintCOPY(sender, e);
@@ -361,7 +374,7 @@ namespace WindowsFormsApp2
         private void buttonMinus_Click(object sender, EventArgs e)
         {
             coeff_scale = 5.0 / 6;
-            n100 *= coeff_scale ;
+            x_end *= coeff_scale ;
             nodes = ReWriteNodeAfterScale(nodes, coeff_scale);
             glControl1_PaintCOPY(sender, e);
         }
@@ -420,12 +433,8 @@ namespace WindowsFormsApp2
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             int indexNode = int.Parse(comboBoxChooseNode.SelectedItem.ToString());
-
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-
-            //MessageBox.Show(indexNode.ToString());
-            DrawMiniCube(Color.GreenYellow,n, m, indexNode);
-            GL.End();
+            
+            DrawMiniCube(Color.GreenYellow, indexNode);
         }
         private void AddItemComboBox(int nodes_count)
         {
