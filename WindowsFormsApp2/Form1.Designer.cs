@@ -50,14 +50,11 @@
             this.labelRotateX = new System.Windows.Forms.Label();
             this.textBoxNodeCOunt = new System.Windows.Forms.TextBox();
             this.textBoxIsNormCount = new System.Windows.Forms.TextBox();
-            this.buttonSwapBuffers = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.X = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Y = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Z = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.textBoxXMouse = new System.Windows.Forms.TextBox();
-            this.textBoxYMouse = new System.Windows.Forms.TextBox();
             this.comboBoxChooseNode = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -73,7 +70,6 @@
             this.glControl1.VSync = false;
             this.glControl1.Load += new System.EventHandler(this.glControl1_Load);
             this.glControl1.Paint += new System.Windows.Forms.PaintEventHandler(this.glControl1_Paint);
-            this.glControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.glControl1_MouseClick);
             // 
             // buttonDivideNMK
             // 
@@ -274,16 +270,6 @@
             this.textBoxIsNormCount.Size = new System.Drawing.Size(100, 26);
             this.textBoxIsNormCount.TabIndex = 22;
             // 
-            // buttonSwapBuffers
-            // 
-            this.buttonSwapBuffers.Location = new System.Drawing.Point(1041, 127);
-            this.buttonSwapBuffers.Name = "buttonSwapBuffers";
-            this.buttonSwapBuffers.Size = new System.Drawing.Size(128, 34);
-            this.buttonSwapBuffers.TabIndex = 23;
-            this.buttonSwapBuffers.Text = "SwapBuffers";
-            this.buttonSwapBuffers.UseVisualStyleBackColor = true;
-            this.buttonSwapBuffers.Click += new System.EventHandler(this.buttonSwapBuffers_Click);
-            // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -325,24 +311,10 @@
             this.Z.Name = "Z";
             this.Z.Width = 60;
             // 
-            // textBoxXMouse
-            // 
-            this.textBoxXMouse.Location = new System.Drawing.Point(939, 248);
-            this.textBoxXMouse.Name = "textBoxXMouse";
-            this.textBoxXMouse.Size = new System.Drawing.Size(100, 26);
-            this.textBoxXMouse.TabIndex = 25;
-            // 
-            // textBoxYMouse
-            // 
-            this.textBoxYMouse.Location = new System.Drawing.Point(1056, 246);
-            this.textBoxYMouse.Name = "textBoxYMouse";
-            this.textBoxYMouse.Size = new System.Drawing.Size(100, 26);
-            this.textBoxYMouse.TabIndex = 26;
-            // 
             // comboBoxChooseNode
             // 
             this.comboBoxChooseNode.FormattingEnabled = true;
-            this.comboBoxChooseNode.Location = new System.Drawing.Point(1048, 299);
+            this.comboBoxChooseNode.Location = new System.Drawing.Point(1056, 353);
             this.comboBoxChooseNode.Name = "comboBoxChooseNode";
             this.comboBoxChooseNode.Size = new System.Drawing.Size(121, 28);
             this.comboBoxChooseNode.TabIndex = 27;
@@ -354,10 +326,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1200, 723);
             this.Controls.Add(this.comboBoxChooseNode);
-            this.Controls.Add(this.textBoxYMouse);
-            this.Controls.Add(this.textBoxXMouse);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.buttonSwapBuffers);
             this.Controls.Add(this.textBoxIsNormCount);
             this.Controls.Add(this.textBoxNodeCOunt);
             this.Controls.Add(this.labelRotateX);
@@ -382,7 +351,7 @@
             this.Controls.Add(this.glControl1);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "3D modeling";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -413,10 +382,7 @@
         private System.Windows.Forms.Label labelRotateX;
         private System.Windows.Forms.TextBox textBoxNodeCOunt;
         private System.Windows.Forms.TextBox textBoxIsNormCount;
-        private System.Windows.Forms.Button buttonSwapBuffers;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TextBox textBoxXMouse;
-        private System.Windows.Forms.TextBox textBoxYMouse;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn X;
         private System.Windows.Forms.DataGridViewTextBoxColumn Y;

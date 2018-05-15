@@ -1,4 +1,0 @@
-C:\Users\bohdanka\source\repos\WindowsFormsApp3\.vs\WindowsFormsApp2\lut\0\i\WindowsFormsApp3\Debug\WindowsFormsApp2.Form1.resources
-C:\Users\bohdanka\source\repos\WindowsFormsApp3\.vs\WindowsFormsApp2\lut\0\i\WindowsFormsApp3\Debug\WindowsFormsApp2.Properties.Resources.resources
-C:\Users\bohdanka\source\repos\WindowsFormsApp3\.vs\WindowsFormsApp2\lut\0\i\WindowsFormsApp3\Debug\WindowsFormsApp3.csproj.GenerateResource.cache
-C:\Users\bohdanka\source\repos\WindowsFormsApp3\.vs\WindowsFormsApp2\lut\0\i\WindowsFormsApp3\Debug\WindowsFormsApp3.csproj.CoreCompileInputs.cache

@@ -18,11 +18,11 @@ namespace WindowsFormsApp2
         int w;
         int h;
         double x_start = 0;
-        double x_end = 200;
+        double x_end = 250;
         double coeff_scale;
         double rotateX = 15;
         double rotateY = -30;
-        double rotateZ = 0;
+        double rotateZ = 7;
         int n = 1;
         int m = 1;
         int k = 1;
@@ -122,12 +122,11 @@ namespace WindowsFormsApp2
 
         private void PaintCube(double rotateX, double rotateY, double rotateZ)
         {
-            int dx=100, dy=70, dz=3;
             GL.Rotate(rotateX, 1, 0, 0);
             GL.Rotate(rotateY, 0, 1, 0);
             GL.Rotate(rotateZ, 0, 0, 1);
 
-            GL.Translate(dx, dy, dz);
+            //GL.Translate(dx, dy, dz);
 
             nodes = InitializeNodes();
             GL.Color3(Color.White);
@@ -221,11 +220,17 @@ namespace WindowsFormsApp2
             }
 
 
-            glControl1.SwapBuffers();
+            //glControl1.SwapBuffers();
             DrawLinesCubes();
-
-
+            
+           // GL.Color3(Color.Red);
+           // GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
+           //GL.Begin(BeginMode.Quads);
+           // PaintQuads(101, 105, 129,125);
+           // GL.End();
+            this.Invalidate();
             glControl1.SwapBuffers();
+            //comboBoxChooseNode.Text = "4";
             //DrawMiniCube(Color.YellowGreen,n, m,0);
 
             //if (n > 1)
@@ -340,12 +345,22 @@ namespace WindowsFormsApp2
             GL.Color3(color);
             GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
             GL.Begin(BeginMode.Quads);
-            PaintQuads(cubes[0], cubes[1], cubes[5], cubes[4]);
-            PaintQuads(cubes[1], cubes[2], cubes[6], cubes[5]);
+
             PaintQuads(cubes[4], cubes[7], cubes[6], cubes[5]);
+
+            PaintQuads(cubes[0], cubes[1], cubes[5], cubes[4]);
             PaintQuads(cubes[4], cubes[7], cubes[3], cubes[0]);
             PaintQuads(cubes[7], cubes[6], cubes[2], cubes[3]);
-            
+                GL.End();
+            GL.Color3(Color.Red);
+            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
+            GL.Begin(BeginMode.Quads);
+            PaintQuads(cubes[1], cubes[2], cubes[6], cubes[5]);
+
+            //GL.Color3(color);
+            //GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
+
+
             GL.End();
             glControl1.SwapBuffers();
             
@@ -420,14 +435,14 @@ namespace WindowsFormsApp2
             glControl1.SwapBuffers();
         }
 
-        private void glControl1_MouseClick(object sender, MouseEventArgs e)
-        {
-            int x = e.X;
-            int y = e.Y;
+        //private void glControl1_MouseClick(object sender, MouseEventArgs e)
+        //{
+        //    int x = e.X;
+        //    int y = e.Y;
 
-            textBoxXMouse.Text = x.ToString();
-            textBoxYMouse.Text = y.ToString();
-        }
+        //    textBoxXMouse.Text = x.ToString();
+        //    textBoxYMouse.Text = y.ToString();
+        //}
         
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
