@@ -64,7 +64,6 @@ namespace WindowsFormsApp2
             loaded = true;
             SetupViewport();
         }
-
         private void SetupViewport()
         {
             w = glControl1.Width;
@@ -80,7 +79,6 @@ namespace WindowsFormsApp2
         {
             NewMethod();
         }
-
         private void NewMethod()
         {
             Matrix4 mDim = new Matrix4();
@@ -218,8 +216,7 @@ namespace WindowsFormsApp2
                     }
                 }
             }
-
-
+            
             //glControl1.SwapBuffers();
             DrawLinesCubes();
             
