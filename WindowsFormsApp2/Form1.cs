@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenTK;
+using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 
 namespace WindowsFormsApp2
@@ -26,7 +28,13 @@ namespace WindowsFormsApp2
         int n = 1;
         int m = 1;
         int k = 1;
+        Bitmap bmpTex;
+        double AngleX;
+        double AngleY;
         List<Node> nodes = new List<Node>();
+        List<int> indexMiniCubes = new List<int>() { 0,1,2,3,4,5,6,7};
+        private BitmapData bmpData;
+
         public Form1()
         {
             InitializeComponent();
@@ -63,6 +71,43 @@ namespace WindowsFormsApp2
         {
             loaded = true;
             SetupViewport();
+           // if (checkBoxColorful.Checked==true)
+            
+        }
+        private void buttonColorfulQuads_Click(object sender, EventArgs e)
+        {
+        //    this.Invalidate();
+        //    glControl1.SwapBuffers();
+            GL.Color3(Color.White);
+            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill); // line
+            GL.Begin(BeginMode.Quads); 
+            PaintQuads(0, 1, 2, 3);
+
+            GL.Color3(Color.Red);
+            GL.Begin(BeginMode.Quads);
+            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
+            PaintQuads(1, 5, 6, 2);
+            //GL.End();
+
+            GL.Color3(Color.Aqua);
+            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
+            GL.Begin(BeginMode.Quads);
+            PaintQuads(3, 7, 6, 2);
+            //GL.End();
+
+            GL.Color3(Color.Green);
+            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
+            GL.Begin(BeginMode.Quads);
+            PaintQuads(3, 7, 4, 0);
+            //GL.End();
+
+            GL.Color3(Color.HotPink);
+            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
+            GL.Begin(BeginMode.Quads);
+            PaintQuads(7, 6, 5, 4);
+           GL.End();
+            glControl1.Invalidate();
+            glControl1.SwapBuffers(); 
         }
         private void SetupViewport()
         {
@@ -217,88 +262,12 @@ namespace WindowsFormsApp2
                 }
             }
             
-            //glControl1.SwapBuffers();
+            glControl1.SwapBuffers();
             DrawLinesCubes();
             
-           // GL.Color3(Color.Red);
-           // GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
-           //GL.Begin(BeginMode.Quads);
-           // PaintQuads(101, 105, 129,125);
-           // GL.End();
-            this.Invalidate();
+            //this.Invalidate();
             glControl1.SwapBuffers();
-            //comboBoxChooseNode.Text = "4";
-            //DrawMiniCube(Color.YellowGreen,n, m,0);
-
-            //if (n > 1)
-            //{
-            //    double[] pointsX = new double[n - 1];
-            //    for (int i = 0; i < pointsX.Length; i++)
-            //    {
-            //        pointsX[i] = n0 + (n100 - n0) * (i + 1) / n;
-            //    }
-            //    GL.Color3(Color.Red);
-            //    GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-            //    GL.Begin(BeginMode.Quads);
-
-            //    for (int i = 0; i < pointsX.Length; i++)
-            //    {
-            //        int countFirst = nodes.Count;
-            //        nodes.Add(new Node(pointsX[i], n0, n0));
-            //        nodes.Add(new Node(pointsX[i], n0, n100));
-            //        nodes.Add(new Node(pointsX[i], n100, n100));
-            //        nodes.Add(new Node(pointsX[i], n100, n0));
-            //        PaintQuads(countFirst, countFirst + 1, countFirst + 2, countFirst +3);
-            //    }
-            //    GL.End();
-
-            //}
-            //if (m > 1)
-            //{
-            //    double[] pointsY = new double[m - 1];
-            //    for (int i = 0; i < pointsY.Length; i++)
-            //    {
-            //        pointsY[i] = n0 + (n100 - n0) * (i + 1) / m;
-            //    }
-            //    GL.Color3(Color.Green);
-            //    GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-            //    GL.Begin(BeginMode.Quads);
-
-            //    for (int i = 0; i < pointsY.Length; i++)
-            //    {
-            //        int countFirst = nodes.Count;
-            //        nodes.Add(new Node(n0,pointsY[i], n0));
-            //        nodes.Add(new Node(n0,pointsY[i], n100));
-            //        nodes.Add(new Node(n100,pointsY[i], n100));
-            //        nodes.Add(new Node(n100,pointsY[i],  n0));
-            //        PaintQuads(countFirst, countFirst + 1, countFirst + 2, countFirst + 3);
-            //    }
-            //    GL.End();
-
-            //}
-            //if (k > 1)
-            //{
-            //    double[] pointsZ = new double[k - 1];
-            //    for (int i = 0; i < pointsZ.Length; i++)
-            //    {
-            //        pointsZ[i] = n0 + (n100 - n0) * (i + 1) / k;
-            //    }
-            //    GL.Color3(Color.Blue);
-            //    GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-            //    GL.Begin(BeginMode.Quads);
-
-            //    for (int i = 0; i < pointsZ.Length; i++)
-            //    {
-            //        int countFirst = nodes.Count;
-            //        nodes.Add(new Node(n0, n0, pointsZ[i]));
-            //        nodes.Add(new Node(n0, n100, pointsZ[i]));
-            //        nodes.Add(new Node(n100, n100, pointsZ[i]));
-            //        nodes.Add(new Node(n100, n0, pointsZ[i]));
-            //        PaintQuads(countFirst, countFirst + 1, countFirst + 2, countFirst + 3);
-            //    }
-            //    GL.End();
-
-            //}
+            
 
             //for testing
             textBoxNodeCOunt.Text = nodes.Count.ToString();
@@ -313,14 +282,15 @@ namespace WindowsFormsApp2
 
             WriteDataGridView();
             AddItemComboBox(nodes.Count);
-            //glControl1.Refresh();
             
         }
 
         private void DrawMiniCube(Color color, int delta)
         {
             int[] cubes = new int[8];
-
+            indexMiniCubes = null;
+            indexMiniCubes = new List<int>();
+            
             cubes[0] = (0 + (n + 1) * (m + 1) * (k - 1) + delta) % nodes.Count;
             cubes[1] = (1 + (n + 1) * (m + 1) * (k - 1) + delta) % nodes.Count;
             cubes[2] = (n + (n + 1) * (m + 1) * (k - 1) + 2 + delta) % nodes.Count;
@@ -329,16 +299,10 @@ namespace WindowsFormsApp2
             cubes[5] = ((n + 1) * (m + 1) + (n + 1) * (m + 1) * (k - 1) + 1 + delta) % nodes.Count;
             cubes[6] = ((n + 1) * (m + 2) + (n + 1) * (m + 1) * (k - 1) + 1 + delta) % nodes.Count;
             cubes[7] = ((n + 1) * (m + 2) + (n + 1) * (m + 1) * (k - 1) + delta) % nodes.Count;
-
-            cubes[0] = (0 + (n + 1) * (m + 1) * (k - 1) + delta);
-            cubes[1] = (1 + (n + 1) * (m + 1) * (k - 1) + delta);
-            cubes[2] = (n + (n + 1) * (m + 1) * (k - 1) + 2 + delta);
-            cubes[3] = (n + 1 + (n + 1) * (m + 1) * (k - 1) + delta);
-            cubes[4] = ((n + 1) * (m + 1) + (n + 1) * (m + 1) * (k - 1) + delta);
-            cubes[5] = ((n + 1) * (m + 1) + (n + 1) * (m + 1) * (k - 1) + 1 + delta);
-            cubes[6] = ((n + 1) * (m + 2) + (n + 1) * (m + 1) * (k - 1) + 1 + delta);
-            cubes[7] = ((n + 1) * (m + 2) + (n + 1) * (m + 1) * (k - 1) + delta);
-
+            for (int i=0;i<8;i++)
+            {
+                indexMiniCubes.Add(cubes[i]);
+            }
             GL.Color3(color);
             GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
             GL.Begin(BeginMode.Quads);
@@ -348,10 +312,10 @@ namespace WindowsFormsApp2
             PaintQuads(cubes[0], cubes[1], cubes[5], cubes[4]);
             PaintQuads(cubes[4], cubes[7], cubes[3], cubes[0]);
             PaintQuads(cubes[7], cubes[6], cubes[2], cubes[3]);
-                GL.End();
-            GL.Color3(Color.Red);
-            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
-            GL.Begin(BeginMode.Quads);
+            //    GL.End();
+            //GL.Color3(Color.Red);
+            //GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
+            //GL.Begin(BeginMode.Quads);
             PaintQuads(cubes[1], cubes[2], cubes[6], cubes[5]);
 
             //GL.Color3(color);
@@ -359,7 +323,6 @@ namespace WindowsFormsApp2
 
 
             GL.End();
-            glControl1.SwapBuffers();
             
         }
      private void WriteDataGridView()
@@ -381,6 +344,7 @@ namespace WindowsFormsApp2
             nodes = ReWriteNodeAfterScale(nodes, coeff_scale);
             
             glControl1_PaintCOPY(sender, e);
+            buttonDivideNMK_Click(sender, e);
         }
 
         private void buttonMinus_Click(object sender, EventArgs e)
@@ -389,42 +353,50 @@ namespace WindowsFormsApp2
             x_end *= coeff_scale ;
             nodes = ReWriteNodeAfterScale(nodes, coeff_scale);
             glControl1_PaintCOPY(sender, e);
+            buttonDivideNMK_Click(sender, e);
         }
 
         private void buttonRotateXPlus_Click(object sender, EventArgs e)
         {
             rotateX += 10;
             glControl1_PaintCOPY(sender, e);
+            buttonDivideNMK_Click(sender, e);
         }
 
         private void buttonRotateXMinus_Click(object sender, EventArgs e)
         {
             rotateX -= 10;
-            glControl1_PaintCOPY(sender, e); 
+            glControl1_PaintCOPY(sender, e);
+            buttonDivideNMK_Click(sender, e);
         }
 
         private void buttonRotateYPlus_Click(object sender, EventArgs e)
         {
             rotateY += 10;
             glControl1_PaintCOPY(sender, e);
+
+            buttonDivideNMK_Click(sender, e);
         }
 
         private void buttonRotateYMinus_Click(object sender, EventArgs e)
         {
             rotateY -= 10;
             glControl1_PaintCOPY(sender, e);
+            buttonDivideNMK_Click(sender, e);
         }
 
         private void buttonRotateZPlus_Click(object sender, EventArgs e)
         {
             rotateZ += 10;
             glControl1_PaintCOPY(sender, e);
+            buttonDivideNMK_Click(sender, e);
         }
 
         private void buttonRotateZMinus_Click(object sender, EventArgs e)
         {
             rotateZ -= 10;
             glControl1_PaintCOPY(sender, e);
+            buttonDivideNMK_Click(sender, e);
         }
 
         private void buttonSwapBuffers_Click(object sender, EventArgs e)
@@ -444,9 +416,12 @@ namespace WindowsFormsApp2
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            GL.Clear(ClearBufferMask.ColorBufferBit);
             int indexNode = int.Parse(comboBoxChooseNode.SelectedItem.ToString());
-            
+            if (indexNode % (n+1) == n ) { indexNode -=1; }
             DrawMiniCube(Color.GreenYellow, indexNode);
+
+            glControl1.SwapBuffers();
         }
         private void AddItemComboBox(int nodes_count)
         {
@@ -456,5 +431,64 @@ namespace WindowsFormsApp2
                 comboBoxChooseNode.Items.Add(i);
             }
         }
+
+        private void buttonTexture_Click(object sender, EventArgs e)
+        {
+            GL.Clear(ClearBufferMask.ColorBufferBit);
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+            bmpTex = new Bitmap("C:\\Users\\bohdanka\\source\\repos\\WindowsFormsApp3\\WindowsFormsApp2\\asfalt.bmp");
+            //bmpTex = new Bitmap("C:\\Users\\bohdanka\\source\\repos\\WindowsFormsApp3\\WindowsFormsApp2\\2.bmp");
+
+            GLTexture.LoadTexture(bmpTex);
+            GL.Enable(EnableCap.Texture2D);
+
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.QuadTextureSelectSgis, (int)TextureMinFilter.Nearest);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
+
+           
+            GL.TexCoord2(0, 0); GL.Vertex3(nodes[indexMiniCubes[2]].X, nodes[indexMiniCubes[2]].Y, nodes[indexMiniCubes[2]].Z);
+            GL.TexCoord2(1, 0); GL.Vertex3(nodes[indexMiniCubes[6]].X, nodes[indexMiniCubes[6]].Y, nodes[indexMiniCubes[6]].Z);
+            GL.TexCoord2(1, 1); GL.Vertex3(nodes[indexMiniCubes[7]].X, nodes[indexMiniCubes[7]].Y, nodes[indexMiniCubes[7]].Z);
+            GL.TexCoord2(0, 1); GL.Vertex3(nodes[indexMiniCubes[3]].X, nodes[indexMiniCubes[3]].Y, nodes[indexMiniCubes[3]].Z);
+            // Back Face
+            GL.Color3(Color.Blue);
+            GL.TexCoord2(1.0f, 0.0f); GL.Vertex3(nodes[indexMiniCubes[0]].X, nodes[indexMiniCubes[0]].Y, nodes[indexMiniCubes[0]].Z);
+            GL.TexCoord2(1.0f, 1.0f); GL.Vertex3(nodes[indexMiniCubes[1]].X, nodes[indexMiniCubes[1]].Y, nodes[indexMiniCubes[1]].Z);
+            GL.TexCoord2(0.0f, 1.0f); GL.Vertex3(nodes[indexMiniCubes[5]].X, nodes[indexMiniCubes[5]].Y, nodes[indexMiniCubes[5]].Z);
+            GL.TexCoord2(0.0f, 0.0f); GL.Vertex3(nodes[indexMiniCubes[4]].X, nodes[indexMiniCubes[4]].Y, nodes[indexMiniCubes[4]].Z);
+            // Top Face
+            GL.TexCoord2(0.0f, 1.0f); GL.Vertex3(nodes[indexMiniCubes[7]].X, nodes[indexMiniCubes[7]].Y, nodes[indexMiniCubes[7]].Z);
+            GL.TexCoord2(0.0f, 0.0f); GL.Vertex3(nodes[indexMiniCubes[6]].X, nodes[indexMiniCubes[6]].Y, nodes[indexMiniCubes[6]].Z);
+            GL.TexCoord2(1.0f, 0.0f); GL.Vertex3(nodes[indexMiniCubes[5]].X, nodes[indexMiniCubes[5]].Y, nodes[indexMiniCubes[5]].Z);
+            GL.TexCoord2(1.0f, 1.0f); GL.Vertex3(nodes[indexMiniCubes[4]].X, nodes[indexMiniCubes[4]].Y, nodes[indexMiniCubes[4]].Z);
+            // Bottom Face
+            GL.TexCoord2(1.0f, 1.0f); GL.Vertex3(nodes[indexMiniCubes[0]].X, nodes[indexMiniCubes[0]].Y, nodes[indexMiniCubes[0]].Z);
+            GL.TexCoord2(0.0f, 1.0f); GL.Vertex3(nodes[indexMiniCubes[1]].X, nodes[indexMiniCubes[1]].Y, nodes[indexMiniCubes[1]].Z);
+            GL.TexCoord2(0.0f, 0.0f); GL.Vertex3(nodes[indexMiniCubes[2]].X, nodes[indexMiniCubes[2]].Y, nodes[indexMiniCubes[2]].Z);
+            GL.TexCoord2(1.0f, 0.0f); GL.Vertex3(nodes[indexMiniCubes[3]].X, nodes[indexMiniCubes[3]].Y, nodes[indexMiniCubes[3]].Z);
+            // Right face
+            GL.TexCoord2(1.0f, 0.0f); GL.Vertex3(nodes[indexMiniCubes[5]].X, nodes[indexMiniCubes[5]].Y, nodes[indexMiniCubes[5]].Z);
+            GL.TexCoord2(1.0f, 1.0f); GL.Vertex3(nodes[indexMiniCubes[6]].X, nodes[indexMiniCubes[6]].Y, nodes[indexMiniCubes[6]].Z);
+            GL.TexCoord2(0.0f, 1.0f); GL.Vertex3(nodes[indexMiniCubes[2]].X, nodes[indexMiniCubes[2]].Y, nodes[indexMiniCubes[2]].Z);
+            GL.TexCoord2(0.0f, 0.0f); GL.Vertex3(nodes[indexMiniCubes[1]].X, nodes[indexMiniCubes[1]].Y, nodes[indexMiniCubes[1]].Z);
+            // Left Face
+            GL.TexCoord2(0.0f, 0.0f); GL.Vertex3(nodes[indexMiniCubes[0]].X, nodes[indexMiniCubes[0]].Y, nodes[indexMiniCubes[0]].Z);
+            GL.TexCoord2(1.0f, 0.0f); GL.Vertex3(nodes[indexMiniCubes[4]].X, nodes[indexMiniCubes[4]].Y, nodes[indexMiniCubes[4]].Z);
+            GL.TexCoord2(1.0f, 1.0f); GL.Vertex3(nodes[indexMiniCubes[7]].X, nodes[indexMiniCubes[7]].Y, nodes[indexMiniCubes[7]].Z);
+            GL.TexCoord2(0.0f, 1.0f); GL.Vertex3(nodes[indexMiniCubes[3]].X, nodes[indexMiniCubes[3]].Y, nodes[indexMiniCubes[3]].Z);
+            //GL.End();
+            //glControl1.Invalidate();
+            //glControl1.SwapBuffers();
+
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Nearest);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
+
+
+            //bmpTex.UnlockBits(bmpData);
+            glControl1_PaintCOPY(sender, e);
+            buttonDivideNMK_Click(sender, e);
+        }
+
+        
     }
 }

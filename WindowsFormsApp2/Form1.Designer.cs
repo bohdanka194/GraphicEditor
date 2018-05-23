@@ -56,6 +56,13 @@
             this.Y = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Z = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comboBoxChooseNode = new System.Windows.Forms.ComboBox();
+            this.buttonTexture = new System.Windows.Forms.Button();
+            this.buttonColorfulQuads = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -320,11 +327,88 @@
             this.comboBoxChooseNode.TabIndex = 27;
             this.comboBoxChooseNode.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
+            // buttonTexture
+            // 
+            this.buttonTexture.Location = new System.Drawing.Point(12, 666);
+            this.buttonTexture.Name = "buttonTexture";
+            this.buttonTexture.Size = new System.Drawing.Size(124, 45);
+            this.buttonTexture.TabIndex = 28;
+            this.buttonTexture.Text = "Texture";
+            this.buttonTexture.UseVisualStyleBackColor = true;
+            this.buttonTexture.Click += new System.EventHandler(this.buttonTexture_Click);
+            // 
+            // buttonColorfulQuads
+            // 
+            this.buttonColorfulQuads.Location = new System.Drawing.Point(177, 541);
+            this.buttonColorfulQuads.Name = "buttonColorfulQuads";
+            this.buttonColorfulQuads.Size = new System.Drawing.Size(103, 45);
+            this.buttonColorfulQuads.TabIndex = 29;
+            this.buttonColorfulQuads.Text = "buttonColorfulQuads";
+            this.buttonColorfulQuads.UseVisualStyleBackColor = true;
+            this.buttonColorfulQuads.Click += new System.EventHandler(this.buttonColorfulQuads_Click);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(13, 515);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(113, 24);
+            this.checkBox1.TabIndex = 30;
+            this.checkBox1.Text = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(13, 541);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(113, 24);
+            this.checkBox2.TabIndex = 31;
+            this.checkBox2.Text = "checkBox2";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(12, 571);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(113, 24);
+            this.checkBox3.TabIndex = 32;
+            this.checkBox3.Text = "checkBox3";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(13, 603);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(113, 24);
+            this.checkBox4.TabIndex = 33;
+            this.checkBox4.Text = "checkBox4";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            // 
+            // checkBox5
+            // 
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Location = new System.Drawing.Point(13, 634);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(113, 24);
+            this.checkBox5.TabIndex = 34;
+            this.checkBox5.Text = "checkBox5";
+            this.checkBox5.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1200, 723);
+            this.Controls.Add(this.checkBox5);
+            this.Controls.Add(this.checkBox4);
+            this.Controls.Add(this.checkBox3);
+            this.Controls.Add(this.checkBox2);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.buttonColorfulQuads);
+            this.Controls.Add(this.buttonTexture);
             this.Controls.Add(this.comboBoxChooseNode);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.textBoxIsNormCount);
@@ -388,6 +472,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Y;
         private System.Windows.Forms.DataGridViewTextBoxColumn Z;
         private System.Windows.Forms.ComboBox comboBoxChooseNode;
+        private System.Windows.Forms.Button buttonTexture;
+        private System.Windows.Forms.Button buttonColorfulQuads;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.CheckBox checkBox5;
     }
 }
 
