@@ -89,7 +89,7 @@ namespace WindowsFormsApp2
             PaintQuads(1, 5, 6, 2);
             //GL.End();
 
-            GL.Color3(Color.Aqua);
+            GL.Color3(Color.Brown);
             GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
             GL.Begin(BeginMode.Quads);
             PaintQuads(3, 7, 6, 2);
@@ -106,7 +106,6 @@ namespace WindowsFormsApp2
             GL.Begin(BeginMode.Quads);
             PaintQuads(7, 6, 5, 4);
            GL.End();
-            glControl1.Invalidate();
             glControl1.SwapBuffers(); 
         }
         private void SetupViewport()
@@ -145,8 +144,8 @@ namespace WindowsFormsApp2
             GL.Color3(Color.White);
             GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
                   
-            GL.Enable(EnableCap.Light0); // джерела світла, 8 ламп 0..7
-            GL.Light(LightName.Light0, LightParameter.Position, new float[] { 0.0f, 0.0f, 500.0f, 1.0f });
+            GL.Enable(EnableCap.Light3); // джерела світла, 8 ламп 0..7
+            GL.Light(LightName.Light3, LightParameter.Position, new float[] { 0.0f, 0.0f, 500.0f, 0.0f });
             // GL.Light(LightName.Light0, LightParameter.Diffuse, new float[] { 1.0f, 1.0f, 1.0f, 1.0f });
             GL.LightModel(LightModelParameter.LightModelLocalViewer, new float[] { 1.0f });
 
